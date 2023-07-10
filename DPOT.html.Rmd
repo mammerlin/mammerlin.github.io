@@ -1,20 +1,20 @@
 ---
-title: "DD2B combined with U16S : ZymoBIOMICS and BEI HM-782D Microbial Community Standard"
+title: "DPOT combined with U16S : ZymoBIOMICS and BEI HM-782D Microbial Community Standard"
 author: "Chieh Hua Lin"
-date: "2022/2/24"
+date: "2023/7/7"
 output: html_document
 ---
 
-email: mammer@nhri.edu.tw
+email: [mammer\@nhri.edu.tw](mailto:mammer@nhri.edu.tw){.email}
 
 ### Data
-ZymoBIOMICS D6305 (denoted by Zymo8) and BEI HM-782D (denoted by HM20e) mock communities were used in this demonstration. The sequencing datasets of the mock communities were obtained from the NCBI Sequence Read Archive (SRR9089357, SRR5593316).
 
-The mock communities contain the following bacteria.
+In this study, we utilized two mock communities, namely ZymoBIOMICS D6305 (referred to as Zymo8) and BEI HM-782D (referred to as HM20e). The sequencing datasets corresponding to these mock communities were acquired from the NCBI Sequence Read Archive (SRR9089357, SRR5593316).
 
+These mock communities encompass the following bacteria:
 
-| **Zymo8**                     | **HM20e** 																													 |
-| ----------------------------- | ---------------------------------------------------------------- |
+| **Zymo8**                     | **HM20e**                                                        |
+|------------------------|------------------------------------------------|
 | Bacillus subtilis             | Acinetobacter baumannii                                          |
 | Enterococcus faecalis         | Actinomyces odontolyticus (current name : Schaalia odontolytica) |
 | Escherichia coli              | Bacillus cereus                                                  |
@@ -36,47 +36,44 @@ The mock communities contain the following bacteria.
 |                               | Streptococcus mutans                                             |
 |                               | Streptococcus pneumoniae                                         |
 
+#### Please be aware that the subsequent species share identical sequences with those in the mock communities. Consequently, these species were also considered as correct assignments in this analysis.
 
-#### Note that the following species have identical sequences with mock species. Therefore, these species were also considered as correct assignments.
-
-
-| **Mock  species**         | **Species  with identical sequences** |
-| ------------------------- | ------------------------------------- |
-| Bacillus cereus           | Bacillus  anthracis                   |
-|                           | Bacillus mobilis                      |
-|                           | Bacillus sp. FDAARGOS_235             |
-|                           | Bacillus sp. HBCD-sjtu                |
-|                           | Bacillus thuringiensis                |
-| Bacillus subtilis         | Alkalihalobacillus  gibsonii          |
-|                           | Bacillus amyloliquefaciens            |
-|                           | Bacillus licheniformis                |
-|                           | Bacillus sp. 275                      |
-|                           | Bacillus sp. FJAT-14266               |
-|                           | Bacillus sp. Lzh-5                    |
-|                           | Bacillus  sp. MD-5                    |
-|                           | Bacillus sp. Pc3                      |
-|                           | Bacillus sp. YP1                      |
-|                           | Bacillus spizizenii                   |
-|                           | Bacillus  vallismortis                |
-| Clostridium  beijerinckii | Clostridium sp. MF28                  |
-| Escherichia coli          | Shigella  flexneri                    |
-|                           | Shigella sonnei                       |
-|                           | Shigella sp. PAMC  28760              |
-| Lactobacillus  iners      | Amylolactobacillus amylotrophicus     |
-| Staphylococcus  aureus    | Staphylococcus  sp. NBRC 15913        |
-| Streptococcus  agalactiae | Streptococcus  sp. 'group B'          |
-
-
-
-
+| **Mock species**         | **Species with identical sequences** |
+|--------------------------|--------------------------------------|
+| Bacillus cereus          | Bacillus anthracis                   |
+|                          | Bacillus mobilis                     |
+|                          | Bacillus sp. FDAARGOS_235            |
+|                          | Bacillus sp. HBCD-sjtu               |
+|                          | Bacillus thuringiensis               |
+| Bacillus subtilis        | Alkalihalobacillus gibsonii          |
+|                          | Bacillus amyloliquefaciens           |
+|                          | Bacillus licheniformis               |
+|                          | Bacillus sp. 275                     |
+|                          | Bacillus sp. FJAT-14266              |
+|                          | Bacillus sp. Lzh-5                   |
+|                          | Bacillus sp. MD-5                    |
+|                          | Bacillus sp. Pc3                     |
+|                          | Bacillus sp. YP1                     |
+|                          | Bacillus spizizenii                  |
+|                          | Bacillus vallismortis                |
+| Clostridium beijerinckii | Clostridium sp. MF28                 |
+| Escherichia coli         | Shigella flexneri                    |
+|                          | Shigella sonnei                      |
+|                          | Shigella sp. PAMC 28760              |
+| Lactobacillus iners      | Amylolactobacillus amylotrophicus    |
+| Staphylococcus aureus    | Staphylococcus sp. NBRC 15913        |
+| Streptococcus agalactiae | Streptococcus sp. 'group B'          |
 
 ### 16S rRNA reference database : U16S
-U16S is a unified and nonredundant 16S rRNA sequence database created through integration of three widely used databases—RefSeq 16S, SILVA, and EzBioCloud—preceded by systematic taxonomic curation and quality filtering. 
 
+U16S is a consolidated, non-redundant 16S rRNA sequence database, born out of the integration of three extensively utilized databases---RefSeq 16S, SILVA, and EzBioCloud---underpinned by methodical taxonomic curation and quality filtering.
 
-## Demostration of DD2B with U16S
+## Demostration of DPOT with U16S
+
 ```{r setup, include = FALSE}
+require("knitr")
 knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_knit$set(root.dir = "D:/System_bio/Microbiome/Manuscript/")
 ```
 
 ```{r echo=TRUE, message=FALSE,warning=FALSE}
@@ -86,12 +83,12 @@ library(tidyverse)
 library(Biostrings)
 
 ### setup working directory
-setwd("D:/System_bio/Microbiome/Manuscript/")   # CHANGE ME to location of the fastq file
+#setwd("D:/System_bio/Microbiome/Manuscript/")   # CHANGE ME with the path where your fastq file is stored.
 path <- "mock/"
 Q30.path <- paste(path,"Q30/",sep="")
 input.path <- list.files(Q30.path,pattern=".fastq",include.dirs = T,recursive = T,full.names = T)
-nop.path <- file.path(path,"noprimers", basename(input.path))
-filter.path <- paste(path,"noprimers/","filtered/",sep="")
+nop.path <- paste0(path,"noprimers/", basename(input.path))
+filter.path <- paste0(path,"noprimers/","filtered/")
 
 ```
 
@@ -111,9 +108,9 @@ for(i in 1:length(all.sample)){
 
 ```
 
-## Run DDAD2
-The following workflow is recommended and demonstrated by *Benjamin J Callahan*.
-Please refer to <https://benjjneb.github.io/LRASManuscript/>.
+## Run DADA2
+
+The following workflow is recommended and demonstrated by *Benjamin J Callahan*. Please refer to <https://benjjneb.github.io/LRASManuscript/>.
 
 ```{r echo=TRUE, message=FALSE,warning=FALSE,eval=FALSE}
 ### 1. remove primer & orient sequences
@@ -135,28 +132,28 @@ dd <- dada(drp, err=err, BAND_SIZE=32, multithread=TRUE)
 ### 6.Sequence table:construct an amplicon sequence variant table (ASV) table
 seqT <- makeSequenceTable(dd)
 #### 7. Check and Remove chimer
-bim <- isBimeraDenovo(seqT, minFoldParentOverAbundance=3.5, multithread=T)	
+## If you're operating on a Linux system, you can enable the multithread option by setting it to TRUE.
+bim <- isBimeraDenovo(seqT, minFoldParentOverAbundance=3.5, multithread=F)	
 table(bim)
 
 ```
-
 
 ```{r echo=FALSE, message=FALSE,warning=FALSE}
 load("20220224_mock.demo.RData")
 table(bim)
 ```
 
-
-##### One chimeras needs to be rmove.
-
+##### One chimera needs to be removed.
 
 ```{r echo=TRUE, message=FALSE,warning=FALSE,eval=FALSE}
 #### Remove chimer
-seqT.reBim <- removeBimeraDenovo(seqT, method = "per-sample", multithread=T, verbose=TRUE)	
+## If you're operating on a Linux system, you can enable the multithread option by setting it to TRUE.
+seqT.reBim <- removeBimeraDenovo(seqT, method = "per-sample", multithread=F, verbose=TRUE)	
 
 #### 8. assign taxonomy 
 DB <- "U16S/U16S.DADA2_format.fa"
-tax.reBim <- assignTaxonomy(seqT.reBim, DB, multithread=T,tryRC = F)  ### multithread can be set to TRUE using Linux system
+## If you're operating on a Linux system, you can enable the multithread option by setting it to TRUE.
+tax.reBim <- assignTaxonomy(seqT.reBim, DB, multithread=F,tryRC = F)
 ```
 
 ```{r echo=TRUE, message=FALSE,warning=FALSE}
@@ -181,15 +178,13 @@ ASV.abu %>% head
 
 ```
 
-
 ```{r echo=TRUE, message=FALSE,warning=FALSE}
 ### Get ASV sequences
 ASV.seq <- DNAStringSet(getSequences(seqT.reBim))
 names(ASV.seq) <- paste0("ASV_",seq(length(ASV.seq)))
-ASV.seq
+print(ASV.seq)
 
 ```
-
 
 ```{r echo=TRUE, message=FALSE,warning=FALSE}
 ### pick up ASVs which were "NA" or indistinguishable species (including Shigella spp., Escherichia spp., Bacillus spp)
@@ -203,11 +198,10 @@ writeXStringSet(dada2.NA.seq,file="dada2.NA.ASV.fasta",format="fasta")
 
 ```
 
-
 ```{r echo=TRUE, message=FALSE,warning=FALSE}
 ### dada2.NA were perform by BLAST
 blast.dir <- "e:/ncbi-blast-2.12.0+/bin/blastn.exe"
-blast.subject <- "mock/U16S/U16S.blast_20220221.blastdb"
+blast.subject <- "mock/U16S/U16S.blast_20230118.blastdb"
 blast.query <- "dada2.NA.ASV.fasta"
 blast.out <- "dada2.NA.ASV.blast.out"
 blast_script <- paste(blast.dir," -task megablast -query ",blast.query," -db ",blast.subject," -out ",blast.out," -num_threads 20 -outfmt \"6 sseqid qseqid qlen length qstart qend sstart send pident evalue score qcovs\" -max_target_seqs 10",sep="")
@@ -222,9 +216,7 @@ blast.result %>% head
 
 ```
 
-  
 #### Dummy id was used in curated database. We can convert dummy id to taxonomy by blastIDmapping file.
-  
 
 ```{r echo=TRUE, message=FALSE,warning=FALSE}
 blast.IDmapping_file <- "mock/U16S/U16S.blastIDmapping.txt"
@@ -237,21 +229,19 @@ blast.result.3 %>% head
 
 ```
 
-  
-#### **Next step is to decide whether the blast results were reliable.**
-  
+#### **The next step involves determining the reliability of the blast results.**
 
 ```{r echo=TRUE, message=FALSE,warning=FALSE}
-source("DD2B_fun.R")
-##### (a) hits with qcovs >80 were retained; 
+source("DPOT_fun.R")
+##### (a) Blast hits with qcovs >80 were retained; 
 blast.result.q80 <- blast.result.3 %>% filter(qcovs > 80)
 blast.result.list <- split(blast.result.q80,blast.result.q80$qseqid)
 
-## if all hits are uncultured bacterium, keep ; otherwise, remove uncultured bacterium
+## If all hits pertain to an uncultured bacterium, they are preserved; however, any hit labeled as an 'uncultured bacterium' is removed if other specific bacteria are also identified.
 blast.result.list.2 <- lapply(blast.result.list[unlist(lapply(blast.result.list,nrow))> 0],uncultured.check.fun)
 
-##### (b) at most, the three top hits with pident ≥ the highest pident (HPID) minus 0.2 were retained if HPID ≥99; and 
-##### (c) at most, five top hits with pident ≥ HPID-0.2 were retained if HPID <99. 
+##### (b) We retained, at most, the three top hits with  percent identity (pident) equal to or greater than the highest percent identity (HPID)reduced by 0.2, provided that the HPID was 99 or higher. 
+##### (c) If HPID is less than 99, at most the top five hits with a percentage identity greater or equal to HPID minus 0.2 are retained.
 blast.result.keep.pident <- lapply(blast.result.list.2,keep.pident.fun)
 
 blast.result.keep.pident %>% head
@@ -259,15 +249,14 @@ blast.result.keep.pident %>% head
 ```
 
 ```{r echo=TRUE, message=FALSE,warning=FALSE}
-################# 3. integrate BLAST reslut into DADA2 assignTaxonomy
+################# 3. integrate BLAST results into DADA2 assignTaxonomy
 dada2.NA$taxonomy <- unlist(lapply(blast.result.keep.pident[dada2.NA$ASV],'[',1,"rank.level"))
 mock.set <- rbind(ASV.abu %>% filter(!grepl("NA|Shigella|Escherichia|Bacillus",taxonomy)),dada2.NA)
 mock.set %>% head
 
 ```
-  
+
 ## Consolidated taxonomy
-  
 
 ```{r echo=TRUE, message=FALSE,warning=FALSE, results='hold'}
 mock.set.2 <- cbind(mock.set[,c("ASV","taxonomy")], sapply(mock.set %>% select(-c(ASV,taxonomy)),as.numeric))
@@ -286,22 +275,19 @@ mock.set.aggreate.2 <- cbind(mock.set.aggreate %>% select(-taxonomy),tax.name.ra
 mock.set.aggreate.2 %>% head
 ```
 
-  
-### Check taxonomic assignment by DD2B with mock speices
-  
+### Verifying taxonomic assignment by DPOT with mock species
+
 ```{r echo=TRUE, message=FALSE,warning=FALSE}
-## import the species contain in mock set
+## import the species contained in the mock set
 mock.species <- read.table("mock/mock.species.txt",header=T,fill=T,quote = "",sep="\t")
 mock.species %>% head
 
 ```
-  
-**column mock.sp : documented species contain in mock set.**
-**column mock.sp.extend : mock species and those species have identical sequences **
 
-  
-### Check HM20e assginment
-  
+**column mock.sp : documented species contained in the mock set.** **column mock.sp.extend : mock species and those species have identical sequences**
+
+### Verifying HM20e taxonomic assginment
+
 ```{r echo=TRUE, message=FALSE,warning=FALSE}
 HM20e <- mock.set.aggreate.2 %>% filter(HM20e != 0) %>% select(-Zymo8)
 HM20e$HM20e <- as.numeric(HM20e$HM20e)
@@ -317,10 +303,9 @@ HM20e %>% mutate(assgined.sp = species, document.sp = mock.sp) %>% select(TP_FP,
 
 ```
 
-From the comparison table, 20 species of HM20e were assigned correctly.
-  
-  
-### Check Zymo8 assginment
+According to the comparison table, all 20 species of the HM20e set were correctly assigned.
+
+### Verifying Zymo8 taxnomic assginment
 
 ```{r echo=TRUE, message=FALSE,warning=FALSE}
 Zymo8 <- mock.set.aggreate.2 %>% filter(Zymo8 != 0) %>% select(-HM20e)
@@ -337,9 +322,4 @@ Zymo8 %>% mutate(assgined.sp = species, document.sp = mock.sp) %>% select(TP_FP,
 
 ```
 
-From the comparison table, 10 species of Zymo8 were assigned. 
-One assigned species, *Bacillus intestinalis*, was misclassified. Bacillus genus is a indistinguishable genus.
-
-
-
-
+As per the comparison table, 10 species from the Zymo8 set were assigned. However, one species, *Bacillus intestinalis*, was misclassified. The Bacillus genus is known for its indistinguishable nature.
