@@ -754,8 +754,7 @@ blast.result %&gt;% head</code></pre>
 ## 6 U16S_43977  ASV_2 1472   1472      1 1472     30 1501  99.932      0  1469   100</code></pre>
 </div>
 <div id="dummy-id-was-used-in-curated-database.-we-can-convert-dummy-id-to-taxonomy-by-blastidmapping-file." class="section level4">
-<h4>
-In the curated database, we utilized a dummy ID. This dummy ID can be translated into taxonomy using the blastIDmapping file.</h4>
+<h4> In the curated database, we utilized a dummy ID. This dummy ID can be translated into taxonomy using the blastIDmapping file.</h4>
 <pre class="r"><code>blast.IDmapping_file &lt;- &quot;mock/U16S/U16S.blastIDmapping.txt&quot;
 blast.IDmapping &lt;- read.table(file=blast.IDmapping_file,header=T,sep=&quot;\t&quot;)
 blast.result.2 &lt;- merge(blast.result,blast.IDmapping[,c(&quot;rank.level&quot;,&quot;dummy.id&quot;)],by.x=&quot;sseqid&quot;,by.y=&quot;dummy.id&quot;,all.x=T)
