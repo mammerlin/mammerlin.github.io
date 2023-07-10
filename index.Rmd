@@ -216,7 +216,7 @@ blast.result %>% head
 
 ```
 
-#### Dummy id was used in curated database. We can convert dummy id to taxonomy by blastIDmapping file.
+#### In the curated database, we utilized a dummy ID. This dummy ID can be translated into taxonomy using the blastIDmapping file.
 
 ```{r echo=TRUE, message=FALSE,warning=FALSE}
 blast.IDmapping_file <- "mock/U16S/U16S.blastIDmapping.txt"
